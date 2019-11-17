@@ -24,3 +24,12 @@
 # Install Node.js v10.x
 #curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
 #sudo apt-get install -y nodejs
+if [ -d /home/vagrant/phpmyadmin ]; then
+    sudo echo '--- phpMyAdmin already installed. --- '
+else
+    sudo wget -k https://files.phpmyadmin.net/phpMyAdmin/4.9.1/phpMyAdmin-4.9.1-all-languages.tar.gz
+    sudo tar -xzf phpMyAdmin-4.9.1-all-languages.tar.gz -C /home/vagrant/
+    sudo rm phpMyAdmin-4.9.1-all-languages.tar.gz
+    sudo mv /home/vagrant/phpMyAdmin-4.9.1-all-languages/ /home/vagrant/phpmyadmin
+    sudo echo '--- phpMyAdmin 4.9.1 install complete ---'
+fi
