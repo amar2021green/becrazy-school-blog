@@ -19,19 +19,16 @@ Route::get('/', function () {
 
 
 //URLがmaster/〜 のグルーピング。
-//masterは管理画面になるためログインや一般ユーザー向けのフロント画面は別のURLとコントローラを使うこと
+//masterは管理画面になるためログイン,一般ユーザー向けのフロント画面は別のURLとコントローラを使うこと
 Route::prefix('master')->group(function () {
 
-  //
-  //Route::get('users', 'MasterController@users');
-  //Route::get('addUser', 'MasterController@showAddUser');
-  //Route::post('addUser', 'MasterController@addUser');
+  //記事管理（投稿、更新）
+  Route::get('/bloglist', 'MasterController@bloglist');//BLOG一覧
 
-  //記事管理（投稿、削除、更新）
-  Route::get('blogList', 'MasterController@blogList');
-  Route::get('addPost', 'MasterController@showAddPost');
-  Route::post('addPost', 'MasterController@addPost');
-  Route::get('updatePost', 'MasterController@showUpdatePost');
-  Route::post('updatePost', 'MasterController@updatePost');
+  Route::get('addPost', 'MasterController@ShowAddPost');//BLOG投稿
+  Route::post('addPost', 'MasterController@AddPost');//BLOG投稿
 
-})
+  Route::get('updatePost', 'MasterController@ShowUpdatePost');//BLOG更新
+  Route::post('updatePost', 'MasterController@UpdatePost');//BLOG更新
+
+});
