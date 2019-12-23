@@ -23,12 +23,16 @@ Route::get('/', function () {
 Route::prefix('master')->group(function () {
 
   //記事管理（投稿、更新）
-  Route::get('/bloglist', 'MasterController@bloglist');//BLOG一覧
+  Route::get('/bloglist', 'MasterController@bloglist');//BLOG一覧表示
 
-  Route::get('addPost', 'MasterController@ShowAddPost');//BLOG投稿
-  Route::post('addPost', 'MasterController@AddPost');//BLOG投稿
+  Route::get('addblog',function () {
+    return view('post.formblog');
+});//BLOG投稿フォームの表示
+  Route::post('addblog', 'MasterController@ShowPost');
+  //BLOG投稿postリクエスト
+  //この場合のaddblogはdataの送り先
 
-  Route::get('updatePost', 'MasterController@ShowUpdatePost');//BLOG更新
-  Route::post('updatePost', 'MasterController@UpdatePost');//BLOG更新
+  Route::get('updatepost', 'MasterController@ShowUpdatePost');//BLOG更新
+  Route::post('updatepost', 'MasterController@UpdatePost');//BLOG更新
 
 });
