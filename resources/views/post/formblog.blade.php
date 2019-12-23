@@ -4,7 +4,7 @@
 <div class="p-3 mb-2 bg-info text-white">
 
   <dl>
-  <form action="addTodolists" method="POST">
+  <form action="/master/addblog" method="post">
 
     <dt>Title</dt>
     <dd><input type="text" name="title" required value="{{ old('title') }}"></dd>
@@ -12,6 +12,15 @@
     <dl>
     <dt>Content</dt>
     <dd><textarea name="content" required>{{ old('content') }}</textarea></dd>
+
+    <dt>Status</dt>
+    <dd><input type="text" name="status" required value="{{ old('status') }}"></dd>
+
+    <dt>Slug</dt>
+    <dd><input type="text" name="slug" required value="{{ old('slug') }}"></dd>
+
+
+
     </dl>
 
 
