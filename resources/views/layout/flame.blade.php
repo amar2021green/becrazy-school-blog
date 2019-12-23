@@ -35,7 +35,7 @@
       </style>
 
 
-        <title>Todolists - @yield('title')</title>
+        <title>BLOG - @yield('title')</title>
 
         <!-- オプションとして利用するJavaScript -->
           <!-- jQueryというライブラリが必ず最初, 次にPopper.js, 最後にBootstrap のJavaScriptを読み込むようにする -->
