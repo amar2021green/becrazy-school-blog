@@ -13,6 +13,9 @@
     @csrf
     </li>
     <br>
+    <a href="update{{$blogs->id}}">Update</a>
+    <br>
+    <a href="delete{{$blogs->id}}">Delete</a>
     @endforeach
     </ul>
   </div>
