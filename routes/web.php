@@ -28,11 +28,14 @@ Route::prefix('master')->group(function () {
   Route::get('addblog',function () {
     return view('post.formblog');
 });//BLOG投稿フォームの表示
-  Route::post('addblog', 'MasterController@ShowPost');
+  Route::post('addblog', 'MasterController@post');
   //BLOG投稿postリクエスト
   //この場合のaddblogはdataの送り先
 
-  Route::get('updatepost', 'MasterController@ShowUpdatePost');//BLOG更新
-  Route::post('updatepost', 'MasterController@UpdatePost');//BLOG更新
+  Route::get('update{id}', 'MasterController@editcontent');//BLOG更新
+  Route::post('update', 'MasterController@updatecontent');//BLOG更新
+
+  Route::post('delete', 'MasterController@deletecontent');//BLOG削除
+
 
 });
