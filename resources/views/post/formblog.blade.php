@@ -15,10 +15,11 @@
 
     <dt>Status</dt>
     <dd><input type="text" name="status" required value="{{ old('status') }}"></dd>
+    //公開範囲の指定
 
     <dt>Slug</dt>
     <dd><input type="text" name="slug" required value="{{ old('slug') }}"></dd>
-
+    //記事のURL指定
 
 
     </dl>
