@@ -9,6 +9,14 @@ use Illuminate\Support\Facades\Auth;
 
 class MasterController extends Controller {
 
+
+    //コンストラクタ内に$this->middleware('auth')と書くことで、
+    //MasterController内のその他のメソッドを実行する前に、
+    //ログイン済みかどうかをチェックしてくれます。
+    public function __construct() {
+       $this->middleware('auth');
+    }
+
     public function bloglist(){
       //全ての記事取得
       $all = Post::all();
@@ -16,14 +24,15 @@ class MasterController extends Controller {
     }
 
 
-    /**
-    * Post登録処理
-    * @param Request $request Postリクエスト
-    */
-    public function post(Request $request){
-
-
-        if($request->filled('title')){
+    public function showAddblog(){
+      return view('post.formblog');
+    }
+        /**
+        * Post登録処理
+        * @param Request $request Postリクエスト
+        */
+        public function post(Request $request){
+            if($request->filled('title')){
           $request->title;
           //リクエストされたtitleデータを取得して$titleに代入(表示ではない)
         }
@@ -31,34 +40,33 @@ class MasterController extends Controller {
             $request->content;
           //リクエストされたcontentデータを取得して$contentに代入(表示ではない)
           }
+        $新規blog = new Post();
+        //新しいデータを登録する宣言みたいなもの
+        //new Post();でpostsテーブルの１レコード(id,title...)が作成されるイメージ
 
-      $新規blog = new Post();
-      //新しいデータを登録する宣言みたいなもの
-      //new Post();でpostsテーブルの１レコード(id,title...)が作成されるイメージ
+        $新規blog->user_id = 1;
+        //postでサーバに送る際にuser_idに１を指定してリクエストしている
+        //※今回の登録時にはuser_idの指定は必須
 
-      $新規blog->user_id = 1;
-      //postでサーバに送る際にuser_idに１を指定してリクエストしている
-      //※今回の登録時にはuser_idの指定は必須
-
-      $新規blog->title = $request->title;
-      $新規blog->content = $request->content;
-      $新規blog->status = $request->status;
-      $新規blog->slug = $request->slug;
-      //上記は'新規blog'の'title','content'等のインスタンスに
-      //リクエスト時に入力されたtitle,content等のvalueを代入した
+        $新規blog->title = $request->title;
+        $新規blog->content = $request->content;
+        $新規blog->status = $request->status;
+        $新規blog->slug = $request->slug;
+        //上記は'新規blog'の'title','content'等のインスタンスに
+        //リクエスト時に入力されたtitle,content等のvalueを代入した
 
 
-      $新規blog->type = 'article';
-      $新規blog->mime_type = 'text/html';
-      //上記は'新規blog'の'type','mime_type'インスタンスに指定のvalueを入れている
-      //※mime_typeに入れた値は、htmlを指定している
+        $新規blog->type = 'article';
+        $新規blog->mime_type = 'text/html';
+        //上記は'新規blog'の'type','mime_type'インスタンスに指定のvalueを入れている
+        //※mime_typeに入れた値は、htmlを指定している
 
-      $新規blog->save();
-      //フォームから入力されたデータ(title,content)等が
-      //1つのレコードとして新規データに追加(save)された
-      return redirect('/master/bloglist');
-      }
-      //リダイレクトでURLパスを直接指定
+        $新規blog->save();
+        //フォームから入力されたデータ(title,content)等が
+        //1つのレコードとして新規データに追加(save)された
+            return redirect('/master/bloglist');
+          }//リダイレクトでURLパスを直接指定
+
 
 
 //編集フォームをviewする
@@ -96,13 +104,14 @@ class MasterController extends Controller {
 
 
 
-public function delete(Request $request){
+public function deletecontents(Request $request){
   // バリデーション
   $validatedData = $request->validate([
     'id' => 'required'
   ]);
 
-  Post::destroy($request->id);
+  $編集blog = Post::find($request->id);
+  $編集blog->delete();
   return redirect('/master/bloglist');
 }
 
