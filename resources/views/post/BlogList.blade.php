@@ -10,14 +10,41 @@
     <li>
     {{$blogs->title}}：
     {{$blogs->content}}
-    @csrf
     </li>
     <br>
+
     <a href="update{{$blogs->id}}">Update</a>
     <br>
-    <a href="delete{{$blogs->id}}">Delete</a>
+
+    <form action="delete" method="post">
+      <dl>
+      <dd><input type="hidden" name="id" required value="{{ $blogs->id }}"></dd>
+      </dl>
+      <input type="submit" value="Delete">
+      @csrf
+  </form>
+
     @endforeach
     </ul>
+    <br>
+    <form id="logout-form" action="/master/logout" method="POST">
+    @csrf
+    <input type="submit" value="Logout">
+</form>
+<br>
   </div>
+
+  <script>
+
+
+  function deletePost() {
+
+  //confirm関数はOKandCXLポップアップをだし、OK=true CXL=falseをブラウザ上では返す。
+  if (!confirm('Are You Sure ?')) {
+  return false;
+  }
+
+  }
+  </script>
 </div>
 @endsection
