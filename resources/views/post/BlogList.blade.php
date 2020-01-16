@@ -27,10 +27,20 @@
     @endforeach
     </ul>
     <br>
+
+    <head>
+    <link rel="stylesheet" type="text/css" href="button.css">
+    </head>
+
+    <div class="form_conf">
     <form id="logout-form" action="/master/logout" method="POST">
     @csrf
     <input type="submit" value="Logout">
-</form>
+    </form>
+    <a href="http://homestead.test/master/addblog">
+            <button type="button">Add</button>
+    </div>
+
 <br>
   </div>
 
