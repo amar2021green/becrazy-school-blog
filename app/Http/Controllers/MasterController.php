@@ -40,6 +40,7 @@ class MasterController extends Controller {
             $request->content;
           //リクエストされたcontentデータを取得して$contentに代入(表示ではない)
           }
+            
         $新規blog = new Post();
         //新しいデータを登録する宣言みたいなもの
         //new Post();でpostsテーブルの１レコード(id,title...)が作成されるイメージ
