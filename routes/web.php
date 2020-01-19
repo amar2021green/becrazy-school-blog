@@ -37,7 +37,7 @@ Route::prefix('master')->group(function () {
   Route::post('addblog', 'MasterController@post');
 
   Route::get('addTag','MasterController@showAddTag');
-  //Tag投稿postリクエスト
+  //TagとCategory投稿postリクエスト
   //この場合のaddTagはdataの送り先
   Route::post('addTag', 'MasterController@postTag');
 
