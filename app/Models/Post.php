@@ -9,4 +9,9 @@ class Post extends Model
 {
     use SoftDeletes;
     //ソフトデリートを使う宣言；2020/01/07
+
+      public function tags(){
+        return $this->belongsToMany('App\Tag');
+      }
+
 }
