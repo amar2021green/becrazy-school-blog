@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Taxonomy;
 use Illuminate\Support\Facades\Auth;
 
 class MasterController extends Controller {
@@ -40,7 +41,7 @@ class MasterController extends Controller {
             $request->content;
           //リクエストされたcontentデータを取得して$contentに代入(表示ではない)
           }
-            
+
         $新規blog = new Post();
         //新しいデータを登録する宣言みたいなもの
         //new Post();でpostsテーブルの１レコード(id,title...)が作成されるイメージ
@@ -67,6 +68,45 @@ class MasterController extends Controller {
         //1つのレコードとして新規データに追加(save)された
             return redirect('/master/bloglist');
           }//リダイレクトでURLパスを直接指定
+
+
+
+          public function showAddTag(){
+            return view('post.tagForm');
+          }
+              /**
+              * Post登録処理
+              * @param Request $request Postリクエスト
+              */
+              public function postTag(Request $request){
+              if($request->filled('type')){
+              $request->type;
+              }//リクエストされたtypeデータを取得してform typeに入る(表示ではない)
+
+
+                  if($request->filled('name')){
+                $request->name;
+                //リクエストされたnameデータを取得してform nameに入る(表示ではない)
+              }
+
+              $新規tag = new Taxonomy();
+              //新しいデータを登録する宣言みたいなもの
+              //new Taxonomy();でtaxonomyテーブルの１レコード(id,name...)が作成されるイメージ
+
+
+              $新規tag->type = $request->type;
+              $新規tag->name = $request->name;
+              $新規tag->slug = $request->slug;
+              //上記は'$新規tag'の'type','name','slug'のインスタンスに
+              //リクエスト時に入力されたname,slugのvalueを代入した
+
+
+              $新規tag->save();
+              //フォームから入力されたデータ(title,content)等が
+              //1つのレコードとして新規データに追加(save)された
+                  return redirect('/master/bloglist');
+                }//リダイレクトでURLパスを直接指定
+
 
 
 
