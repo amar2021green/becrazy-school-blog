@@ -27,14 +27,22 @@ Route::prefix('master')->group(function () {
   Route::post('/register', 'Auth\MasterRegisterController@register');
 
 
-  //記事管理（投稿、更新）
+  //記事一覧ページ
   Route::get('/bloglist', 'MasterController@bloglist');//BLOG一覧表示
 
-  Route::get('addblog','MasterController@showAddblog');
   //BLOG投稿フォームの表示
-  Route::post('addblog', 'MasterController@post');
+  Route::get('addblog','MasterController@showAddblog');
   //BLOG投稿postリクエスト
   //この場合のaddblogはdataの送り先
+  Route::post('addblog', 'MasterController@post');
+
+  Route::get('addTag','MasterController@showAddTag');
+  //Tag投稿postリクエスト
+  //この場合のaddTagはdataの送り先
+  Route::post('addTag', 'MasterController@postTag');
+
+
+
 
   Route::get('update{id}', 'MasterController@editcontent');//BLOG更新
   Route::post('update', 'MasterController@updatecontent');//BLOG更新
