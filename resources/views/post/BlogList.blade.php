@@ -8,8 +8,10 @@
     <ul>
     @foreach ($all as $blogs)
     <li>
-    {{$blogs->title}}：
-    {{$blogs->content}}
+      <a href="/ordinary/list/{{$blogs->slug}}">
+        {{$blogs->title}}
+      </a>
+
     </li>
     <br>
 
