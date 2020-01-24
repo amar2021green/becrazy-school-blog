@@ -14,9 +14,9 @@
     <dd><textarea name="content" required>{{ old('content') }}</textarea></dd>
 
     <dt>Status(公開/非公開)</dt>
-    <dd><select name="publish">
-      <option required value="{{ old('publish') }}">Open</option>
-      <option>draft</option>
+    <dd><select name="status">
+      <option value="Open">OPEN</option>
+      <option value="Draft">Draft</option>
         </select>
       </dd>
 
