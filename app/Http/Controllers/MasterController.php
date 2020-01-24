@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Post;
-use App\Taxonomy;
+use App\Models\Taxonomy;
 use Illuminate\Support\Facades\Auth;
 
 class MasterController extends Controller {
@@ -24,7 +24,7 @@ class MasterController extends Controller {
       return view('post.BlogList',array('all' => $all));
     }
 
-
+//記事投稿フォーム
     public function showAddblog(){
       return view('post.formblog');
     }
@@ -39,6 +39,11 @@ class MasterController extends Controller {
         }
           if($request->filled('content')){
             $request->content;
+          //リクエストされたcontentデータを取得して$contentに代入(表示ではない)
+          }
+
+          if($request->filled('status')){
+            $request->status;
           //リクエストされたcontentデータを取得して$contentに代入(表示ではない)
           }
 
@@ -57,7 +62,6 @@ class MasterController extends Controller {
         //上記は'新規blog'の'title','content'等のインスタンスに
         //リクエスト時に入力されたtitle,content等のvalueを代入した
 
-
         $新規blog->type = 'article';
         $新規blog->mime_type = 'text/html';
         //上記は'新規blog'の'type','mime_type'インスタンスに指定のvalueを入れている
@@ -70,7 +74,7 @@ class MasterController extends Controller {
           }//リダイレクトでURLパスを直接指定
 
 
-
+//TagCategoryフォーム
           public function showAddTag(){
             return view('post.tagForm');
           }
