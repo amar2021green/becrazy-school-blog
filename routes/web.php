@@ -54,3 +54,12 @@ Route::prefix('master')->group(function () {
 
   Route::get('/ordinary/list', 'OrdinaryController@loggedOut');
   //このloggedOutメソッドはlogoutメソッド(ログアウト処理)が実行されたあとに実行される
+
+  Route::get('/ordinary/list/{slug}','OrdinaryController@ShowContents');
+  //タイトル→コンテンツで入ったときの記事のコンテンツview
+
+  Route::get('/ordinary/tag/{slug}','OrdinaryController@ShowTag');
+  //Tagを見せるview
+
+  Route::get('/ordinary/category/{slug}','OrdinaryController@ShowCategory');
+  //Categoryを見せるview
