@@ -6,18 +6,14 @@
   <dl>
   <form action="/master/addTag" method="post">
 
-    <dt>Category</dt>
+    <dt>Type</dt>
     <dd>
-      <select id="type" name="type" size="6" multiple>
-        <option value="Asia">Asia</option>
-        <option value="North America">North America</option>
-        <option value="South America">South America</option>
-        <option value="Europe">Europe</option>
-        <option value="Africa">Africa</option>
-        <option value="Other">Other Area</option>
+      <select id="type" name="type" size="2" multiple>
+        <option value="category">Category</option>
+        <option value="tag">Tag</option>
       </select>
 
-      <dt>Tag</dt>
+      <dt>Name</dt>
       <dd><input type="text" name="name" required value="{{ old('name') }}"></dd>
 
     <dt>Slug(URL)</dt>
