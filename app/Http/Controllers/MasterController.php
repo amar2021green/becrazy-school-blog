@@ -24,10 +24,15 @@ class MasterController extends Controller {
       return view('post.BlogList',array('all' => $all));
     }
 
+
 //記事投稿フォーム
     public function showAddblog(){
-      return view('post.formblog');
+      $allType = Taxonomy::all();
+      //$allTypeにはTaxonomyの全てが入っているからreturnされる、
+      //post.formblogのフォームの中では$allTypeとして上手く使用する
+      return view('post.formblog',array('allType' => $allType));
     }
+
         /**
         * Post登録処理
         * @param Request $request Postリクエスト
@@ -70,6 +75,10 @@ class MasterController extends Controller {
         $新規blog->save();
         //フォームから入力されたデータ(title,content)等が
         //1つのレコードとして新規データに追加(save)された
+
+        //⭐$新規blog->save();でpostのid1つ(記事)を生成したあとに
+        //アタッチをしてpost_idとtaxonomy_idを紐付ける
+
             return redirect('/master/bloglist');
           }//リダイレクトでURLパスを直接指定
 
