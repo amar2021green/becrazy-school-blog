@@ -48,7 +48,7 @@
         <dd><select name="category">
           @foreach($allType as $category)
             @if($category->type == 'category')
-              <option value="$category->id">
+              <option value="{{$category->id}}">
                 {{$category->name}}
               </option>
             @endif
