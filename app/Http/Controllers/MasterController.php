@@ -64,6 +64,7 @@ class MasterController extends Controller {
         $新規blog->content = $request->content;
         $新規blog->status = $request->status;
         $新規blog->slug = $request->slug;
+
         //上記は'新規blog'の'title','content'等のインスタンスに
         //リクエスト時に入力されたtitle,content等のvalueを代入した
 
@@ -76,9 +77,14 @@ class MasterController extends Controller {
         //フォームから入力されたデータ(title,content)等が
         //1つのレコードとして新規データに追加(save)された
 
+
+
         //⭐$新規blog->save();でpostのid1つ(記事)を生成したあとに
         //アタッチをしてpost_idとtaxonomy_idを紐付ける
-
+        $新規blog->taxonomy()->attach([$request->tag,$request->category]);
+        //$新規blog(記事)をtaxonomyテーブルのidと紐付ける、
+        //attachの中で実行されているのはフォームで定義されているリクエストtag,category
+        
             return redirect('/master/bloglist');
           }//リダイレクトでURLパスを直接指定
 
