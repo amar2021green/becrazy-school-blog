@@ -58,7 +58,7 @@ Route::prefix('master')->group(function () {
   Route::get('/ordinary/list/{slug}','OrdinaryController@ShowContents');
   //タイトル→コンテンツで入ったときの記事のコンテンツview
 
-  Route::get('/ordinary/tag/{slug}','OrdinaryController@ShowTag');
+  Route::get('/ordinary/tags/{slug}','OrdinaryController@ShowTag');
   //Tagを見せるview
 
   Route::get('/ordinary/category/{slug}','OrdinaryController@ShowCategory');
