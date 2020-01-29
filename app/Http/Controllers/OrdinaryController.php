@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Post;
+use App\Models\{Post,Taxonomy};
 use Illuminate\Support\Facades\Auth;
+
 
 class OrdinaryController extends Controller {
 
@@ -18,7 +19,7 @@ class OrdinaryController extends Controller {
   public function ShowContents($slug)
   {
     $kizi1 = Post::where('slug',$slug)->first();
-    //$kizi1にはPostモデルののインスタンスが入る
+    //$kizi1にはPostモデルのインスタンスが入る
 		return view('ordinary.japan',array('kizi1' => $kizi1));
 	}
 
