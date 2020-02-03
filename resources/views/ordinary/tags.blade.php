@@ -6,19 +6,26 @@
   <div class="flex-center position-ref">
     <h1><b>Tag</b></h1>
     <ul>
-
+@foreach($AllTags as $AT)
     <li>
-    {{$tag1->type}}
-    {{$tag1->name}}
-
+    <a href="/master/AllTags/{{$AT->slug}}">
+    {{$AT->name}}
+  </a>
     </li>
     <br>
 
       @csrf
 
-
+@endforeach
     </ul>
     <br>
+    <a href="http://homestead.test/master/addblog">
+      <button type="button">AddForm</button><br>
+
+        <a href="http://homestead.test/master/addTag">
+          <button type="button">AddTag</button><br>
+
+            <a href="http://homestead.test/master/bloglist">Go Top</a>
 
   </div>
 
