@@ -16,6 +16,7 @@ class OrdinaryController extends Controller {
       return view('ordinary.list',array('all' => $all));
   }
 
+
   public function ShowContents($slug)
   {
     $kizi1 = Post::where('slug',$slug)->first();
@@ -23,16 +24,10 @@ class OrdinaryController extends Controller {
 		return view('ordinary.japan',array('kizi1' => $kizi1));
 	}
 
-
-  public function ShowTag($slug)
-  {//typeがTagでなおかつslugにあてはまるwhere文を入れる
-    $tag1 = Taxonomy::where([
-      ['type','tag'],
-      ['slug',$slug]])->first();
-    //$tag1にはTaxonomyモデルのインスタンスが入る
-		return view('ordinary.tags',array('tag1' => $tag1));
-	}
-
+  public function TagPost($slug){
+    $TagPost = Post::where('slug',$slug)->first();
+      return view('ordinary.tokyo',array('TagPost' => $TagPost));
+  }
 
   public function ShowCategory($slug)
   {//typeがcategoryでなおかつslugにあてはまるwhere文を入れる
