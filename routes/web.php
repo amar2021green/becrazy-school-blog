@@ -41,16 +41,22 @@ Route::prefix('master')->group(function () {
   //この場合のaddTagはdataの送り先
   Route::post('addTag', 'MasterController@postTag');
 
+  Route::get('/AllTags/{slug}','MasterController@ShowTagPost');
+  //Tagに紐づく記事一覧を見せるview
 
-
+  Route::get('/AllTags','MasterController@AllTag');
+  //複数Tagを見せるview
+  Route::get('/Tags/{slug}','MasterController@ShowTag');
+  //単体Tagを見せるview
 
   Route::get('update{id}', 'MasterController@editcontent');//BLOG更新
   Route::post('update', 'MasterController@updatecontent');//BLOG更新
-
   Route::post('delete', 'MasterController@deletecontents');//BLOG削除
-
-
 });
+
+
+  Route::get('/ordinary/{slug}','OrdinaryController@TagPost');
+  //Tagに紐づく記事一覧を見せるview
 
   Route::get('/ordinary/list', 'OrdinaryController@loggedOut');
   //このloggedOutメソッドはlogoutメソッド(ログアウト処理)が実行されたあとに実行される
@@ -58,8 +64,8 @@ Route::prefix('master')->group(function () {
   Route::get('/ordinary/list/{slug}','OrdinaryController@ShowContents');
   //タイトル→コンテンツで入ったときの記事のコンテンツview
 
-  Route::get('/ordinary/tags/{slug}','OrdinaryController@ShowTag');
-  //Tagを見せるview
+
+
 
   Route::get('/ordinary/category/{slug}','OrdinaryController@ShowCategory');
   //Categoryを見せるview
