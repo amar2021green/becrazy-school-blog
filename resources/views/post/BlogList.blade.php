@@ -40,10 +40,13 @@
     <input type="submit" value="Logout">
     </form>
     <a href="http://homestead.test/master/addblog">
-            <button type="button">AddForm</button>
-            <br>
-            <a href="http://homestead.test/master/addTag">
-                    <button type="button">AddTag</button>
+      <button type="button">AddForm</button>
+        <br>
+          <a href="http://homestead.test/master/addTag">
+            <button type="button">AddTag</button>
+              <br>
+                <a href="http://homestead.test/master/AllTags">
+                  <button type="button">AllTag</button>
     </div>
 
 <br>
