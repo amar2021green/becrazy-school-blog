@@ -24,6 +24,28 @@ class MasterController extends Controller {
       return view('post.BlogList',array('all' => $all));
     }
 
+    public function AllTag(){
+      $AllTags = Taxonomy::where('type','tag')->get();
+      return view('ordinary.tags',array('AllTags' => $AllTags));
+    }
+
+    public function ShowTag($slug)
+    {//typeがTagでなおかつslugにあてはまるwhere文を入れる
+      $tag1 = Taxonomy::where([
+        ['type','tag'],
+        ['slug',$slug]])->first();
+      //$tag1にはTaxonomyモデルのインスタンスが入る
+      return view('ordinary.tags',array('tag1' => $tag1));
+    }
+
+    public function ShowTagPost($slug){
+      $TagPost = Taxonomy::where([
+        ['type','tag'],
+        ['slug',$slug]])->first();
+        $TagPost->posts;
+      return view('post.TagPosts',array('TagPost' => $TagPost->posts));
+    }
+
 
 //記事投稿フォーム
     public function showAddblog(){
@@ -84,7 +106,7 @@ class MasterController extends Controller {
         $新規blog->taxonomy()->attach([$request->tag,$request->category]);
         //$新規blog(記事)をtaxonomyテーブルのidと紐付ける、
         //attachの中で実行されているのはフォームで定義されているリクエストtag,category
-        
+
             return redirect('/master/bloglist');
           }//リダイレクトでURLパスを直接指定
 
