@@ -1,6 +1,7 @@
 @extends('layout.flame')
 @section('title','BLOG編集')
 @section('body')
+<div class="p-3 haikei">
 <div class= "flex-center position-ref">
   <h1><p class="text-info">BLOG(edit)</p></h1>
   {{--editファイル--}}
