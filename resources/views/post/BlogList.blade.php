@@ -9,7 +9,7 @@
     <ul>
     @foreach ($all as $blogs)
 
-      <a href="/ordinary/list/{{$blogs->slug}}">
+      <a class= "text-white" href="/ordinary/list/{{$blogs->slug}}">
         {{$blogs->title}}
       </a>
 
