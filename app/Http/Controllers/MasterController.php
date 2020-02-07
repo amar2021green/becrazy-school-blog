@@ -46,6 +46,18 @@ class MasterController extends Controller {
       return view('post.TagPosts',array('TagPost' => $TagPost->posts));
     }
 
+    public function AllCategory(){
+      $AllCategories = Taxonomy::where('type','category')->get();
+      return view('ordinary.categories',array('AllCategories' => $AllCategories));
+    }
+
+    public function ShowCategoryPost($slug){
+      $CategoryPost = Taxonomy::where([
+        ['type','category'],
+        ['slug',$slug]])->first();
+        $CategoryPost->posts;
+        return view('post.CategoryPosts',array('CategoryPost' => $CategoryPost->posts));
+    }
 
 //記事投稿フォーム
     public function showAddblog(){
