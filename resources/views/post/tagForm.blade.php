@@ -1,8 +1,8 @@
 @extends('layout.flame')
 @section('title','Tag投稿')
 @section('body')
-<div class="p-3 mb-2 bg-info text-white">
-
+<div class="p-3 haikei">
+  
   <dl>
   <form action="/master/addTag" method="post">
 
