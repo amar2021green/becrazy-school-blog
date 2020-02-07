@@ -41,11 +41,18 @@ Route::prefix('master')->group(function () {
   //この場合のaddTagはdataの送り先
   Route::post('addTag', 'MasterController@postTag');
 
+  Route::get('/AllTags','MasterController@AllTag');
+  //複数Tagを見せるview
   Route::get('/AllTags/{slug}','MasterController@ShowTagPost');
   //Tagに紐づく記事一覧を見せるview
 
-  Route::get('/AllTags','MasterController@AllTag');
-  //複数Tagを見せるview
+  Route::get('/AllCategories','MasterController@AllCategory');
+  //複数Categoryを見せるview
+  Route::get('/AllCategories/{slug}','MasterController@ShowCategoryPost');
+  //Categoryに紐づく記事一覧を見せるview
+
+
+
   Route::get('/Tags/{slug}','MasterController@ShowTag');
   //単体Tagを見せるview
 
@@ -56,7 +63,7 @@ Route::prefix('master')->group(function () {
 
 
   Route::get('/ordinary/{slug}','OrdinaryController@TagPost');
-  //Tagに紐づく記事一覧を見せるview
+  //Tagに紐づく記事一覧から各記事を見せるview
 
   Route::get('/ordinary/list', 'OrdinaryController@loggedOut');
   //このloggedOutメソッドはlogoutメソッド(ログアウト処理)が実行されたあとに実行される
