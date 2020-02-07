@@ -1,52 +1,36 @@
 @extends('layout.flame')
 @section('title','BLOG一覧')
 @section('body')
-<div class="p-3 mb-2 bg-info text-white">
+<div class="p-3 haikei">
 
   <div class="flex-center position-ref">
-    <h1><b>BlogList</b></h1>
+
+
     <ul>
     @foreach ($all as $blogs)
-    <li>
+
       <a href="/ordinary/list/{{$blogs->slug}}">
         {{$blogs->title}}
       </a>
 
-    </li>
-    <br>
 
-    <a href="update{{$blogs->id}}">Update</a>
-    <br>
 
-    <form action="delete" method="post">
-      <dl>
-      <dd><input type="hidden" name="id" required value="{{ $blogs->id }}"></dd>
-      </dl>
-      <input type="submit" value="Delete">
+    <div class="btn-group" role="group" aria-label="グループ1">
+      <a href="update{{$blogs->id}}" type="button" class="btn btn-secondary btn-sm">Update</a>
+    </div>
+
+    <div class="btn-group" role="group" aria-label="グループ2">
+      <form action="delete" method="post">
+        <input type="hidden" name="id" required value="{{ $blogs->id }}">
+          <button type="button" class="btn btn-warning btn-secondary btn-sm" value="Delete">Delete</button>
       @csrf
-  </form>
+      </form>
+    </div><br><br>
+
 
     @endforeach
     </ul>
-    <br>
 
-    <head>
-    <link rel="stylesheet" type="text/css" href="button.css">
-    </head>
-
-    <div class="form_conf">
-    <form id="logout-form" action="/master/logout" method="POST">
-    @csrf
-    <input type="submit" value="Logout">
-    </form>
-    <a href="http://homestead.test/master/addblog">
-      <button type="button">AddForm</button>
-        <br>
-          <a href="http://homestead.test/master/addTag">
-            <button type="button">AddTag</button>
-              <br>
-                <a href="http://homestead.test/master/AllTags">
-                  <button type="button">AllTag</button>
     </div>
 
 <br>
