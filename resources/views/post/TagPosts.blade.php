@@ -1,8 +1,8 @@
 @extends('layout.flame')
 @section('title','タグに紐づく記事一覧')
 @section('body')
-<div class="p-3 mb-2 bg-info text-white">
-
+<div class="p-3 haikei">
+  
   <div class="flex-center position-ref">
     <h1><b>Tag Posts</b></h1>
     <ul>
