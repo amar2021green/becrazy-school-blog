@@ -38,5 +38,16 @@ class OrdinaryController extends Controller {
 		return view('ordinary.categories',array('category1' => $category1));
 	}
 
+  public function AllCategory(){
+    $AllCategories = Taxonomy::where('type','category')->get();
+    return view('ordinary.categories',array('AllCategories' => $AllCategories));
+  }
+
+  public function AllTag(){
+    $AllTags = Taxonomy::where('type','tag')->get();
+    return view('ordinary.tags',array('AllTags' => $AllTags));
+  }
+
+
 
 }
