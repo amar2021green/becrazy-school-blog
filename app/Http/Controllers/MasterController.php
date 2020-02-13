@@ -26,36 +26,26 @@ class MasterController extends Controller {
 
     public function AllTag(){
       $AllTags = Taxonomy::where('type','tag')->get();
-      return view('ordinary.tags',array('AllTags' => $AllTags));
+      return view('post.AllTags',array('AllTags' => $AllTags));
     }
 
-    public function ShowTag($slug)
-    {//typeがTagでなおかつslugにあてはまるwhere文を入れる
-      $tag1 = Taxonomy::where([
-        ['type','tag'],
-        ['slug',$slug]])->first();
-      //$tag1にはTaxonomyモデルのインスタンスが入る
-      return view('ordinary.tags',array('tag1' => $tag1));
-    }
 
     public function ShowTagPost($slug){
       $TagPost = Taxonomy::where([
         ['type','tag'],
         ['slug',$slug]])->first();
-        $TagPost->posts;
       return view('post.TagPosts',array('TagPost' => $TagPost->posts));
     }
 
     public function AllCategory(){
       $AllCategories = Taxonomy::where('type','category')->get();
-      return view('ordinary.categories',array('AllCategories' => $AllCategories));
+      return view('post.AllCategories',array('AllCategories' => $AllCategories));
     }
 
     public function ShowCategoryPost($slug){
       $CategoryPost = Taxonomy::where([
         ['type','category'],
         ['slug',$slug]])->first();
-        $CategoryPost->posts;
         return view('post.CategoryPosts',array('CategoryPost' => $CategoryPost->posts));
     }
 
@@ -124,14 +114,14 @@ class MasterController extends Controller {
 
 
 //TagCategoryフォーム
-          public function showAddTag(){
-            return view('post.tagForm');
+          public function ShowAddTaxonomy(){
+            return view('post.TaxonomyForm');
           }
               /**
               * Post登録処理
               * @param Request $request Postリクエスト
               */
-              public function postTag(Request $request){
+              public function AddTaxonomy(Request $request){
               if($request->filled('type')){
               $request->type;
               }//リクエストされたtypeデータを取得してform typeに入る(表示ではない)
@@ -163,7 +153,7 @@ class MasterController extends Controller {
 
 
 
-//編集フォームをviewする
+//記事編集フォームをviewする
     public function editcontent($id){
       $edit = Post::find($id);
       return view('post.editblog',['編集blog' => $edit]);
@@ -173,7 +163,7 @@ class MasterController extends Controller {
 
 
 
-//編集フォームで入力したものをデータ更新する
+//記事編集フォームで入力したものをデータ更新する
     public function updatecontent(Request $request){
       $request->validate([
         'id' => 'required',
@@ -198,17 +188,55 @@ class MasterController extends Controller {
 
 
 
-public function deletecontents(Request $request){
+  public function deletecontents(Request $request){
   // バリデーション
   $validatedData = $request->validate([
     'id' => 'required'
   ]);
-
   $編集blog = Post::find($request->id);
   $編集blog->delete();
   return redirect('/master/bloglist');
 }
 
+  //Categoryとタグ編集フォームのview
+    public function EditTaxonomy($id){
+      $Edit = Taxonomy::find($id);
+      return view('post.EditTaxonomy',['編集taxonomy' => $Edit]);
+    }
+    //リクエストされたeditidから対象レコードを取得して、$editに代入
+    //リターンviewでpost配下のeditblogファイルを表示させる
+
+    //Categoryとタグ編集フォームのpost
+    public function UpdateTaxonomy(Request $request){
+      $request->validate([
+        'id' => 'required',
+        'name' => 'required',
+        'slug' => 'required'
+      ]);//フォームの入力チェック
+
+      $編集taxonomy = Taxonomy::find($request->id);
+      $編集taxonomy->name = $request->name;
+      $編集taxonomy->slug = $request->slug;
+      $編集taxonomy->save();
+      return redirect('/master/bloglist');
+    }
+    //更新動作は$編集taxonomyにリクエストされたidをもとにレコードインスタンスを代入
+    //$編集taxonomy->name = $request->name でTaxonomyリスト(Category,Tag)
+    //編集したいtaxonomyのidとリクエストしたnameが紐付けられる
+
+    //$編集taxonomy->save();で更新した編集taxonomyがsaveされる（更新）
+    //その後リターンでblogリストにリダイレクトする
+
+    public function DeleteTaxonomy(Request $request){
+    // バリデーション
+    $validatedData = $request->validate([
+      'id' => 'required'
+    ]);
+    $編集taxonomy = Taxonomy::find($request->id);
+    $編集taxonomy->posts()->detach();
+    $編集taxonomy->delete();
+    return redirect('/master/bloglist');
+    }
 
 
 }
