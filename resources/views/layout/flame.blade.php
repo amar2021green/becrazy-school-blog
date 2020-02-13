@@ -13,14 +13,12 @@
 
       <style type="text/css">
       .haikei {
-  background-image: url('/unnamed.jpg');
-  background-position: center center;
-    background-position-x: center;
-    background-position-y: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-attachment: fixed;
-}
+          position: relative;
+          height: 100vh;
+          min-height: 300px;
+          background: url('/unnamed.jpg') no-repeat center center;
+          background-size: cover;
+      }
       </style>
 
 
@@ -37,7 +35,7 @@
 
     <body>
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="/master/bloglist#">管理画面</a>
+        <a class="navbar-brand" href="/master/bloglist#">BLOG 管理画面</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -45,12 +43,12 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
 
-            <li class="nav-item">
+            <li class="nav-item active">
               <a class="nav-link" href="/master/addblog">Add Blog<span class="sr-only">(current)</span></a>
             </li>
 
-            <li class="nav-item">
-              <a class="nav-link" href="/master/addTag">Add Tag</a>
+            <li class="nav-item active">
+              <a class="nav-link" href="/master/AddTaxonomy">Add Taxonomy</a>
             </li>
 
             <li class="nav-item active">
@@ -60,20 +58,25 @@
             <li class="nav-item active">
               <a class="nav-link" href="/master/AllTags">All Tag</a>
             </li>
+          </div>
+        </ul>
+
+<div class="collapse navbar-collapse justify-content-end">
+           <ul class="navbar-nav">
+
+            <li class="nav-item active">
+              <a class="nav-link text-primary" href="http://homestead.test/ordinary/list/">一般View</a>
+            </li>
 
             <li class="nav-item">
               <form id="logout-form" action="/master/logout" method="POST" >
               @csrf
-              <input class="btn btn-link" type="submit" value="Logout">
+              <input class="btn btn-link text-danger" type="submit" value="Logout">
               </form>
             </li>
 
-          </ul>
 
-          <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-          </form>
+          </ul>
         </div>
       </nav>
       @yield("body")
