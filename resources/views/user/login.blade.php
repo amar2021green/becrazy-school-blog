@@ -1,4 +1,4 @@
-@extends('layout.flame')
+@extends('layout.LoginFlame')
 @section('title','Login')
 @section('body')
 
