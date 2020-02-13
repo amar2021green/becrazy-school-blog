@@ -36,10 +36,11 @@ Route::prefix('master')->group(function () {
   //この場合のaddblogはdataの送り先
   Route::post('addblog', 'MasterController@post');
 
-  Route::get('addTag','MasterController@showAddTag');
+  Route::get('AddTaxonomy','MasterController@ShowAddTaxonomy');
   //TagとCategory投稿postリクエスト
-  //この場合のaddTagはdataの送り先
-  Route::post('addTag', 'MasterController@postTag');
+  //この場合のAddTaxonomyはdataの送り先
+  Route::post('AddTaxonomy','MasterController@AddTaxonomy');
+  //TagとCategory投稿post', 'MasterController@postTag');
 
   Route::get('/AllTags','MasterController@AllTag');
   //複数Tagを見せるview
@@ -52,31 +53,33 @@ Route::prefix('master')->group(function () {
   //Categoryに紐づく記事一覧を見せるview
 
 
+  Route::get('update{id}', 'MasterController@editcontent');//BLOG記事更新
+  Route::post('update', 'MasterController@updatecontent');//BLOG記事更新
+  Route::post('delete', 'MasterController@deletecontents');//BLOG記事削除
 
-  Route::get('/Tags/{slug}','MasterController@ShowTag');
-  //単体Tagを見せるview
 
-  Route::get('update{id}', 'MasterController@editcontent');//BLOG更新
-  Route::post('update', 'MasterController@updatecontent');//BLOG更新
-  Route::post('delete', 'MasterController@deletecontents');//BLOG削除
+  Route::get('/taxonomy/update{id}', 'MasterController@EditTaxonomy');
+  //CategoryまたはTagの更新
+  Route::post('/taxonomy/update', 'MasterController@UpdateTaxonomy');
+  //CategoryまたはTagの更新
+  Route::post('/taxonomy/delete', 'MasterController@DeleteTaxonomy');
+  //CategoryまたはTagの削除
 });
 
 
 
 
-  Route::get('/ordinary/list', 'OrdinaryController@loggedOut');
-  //このloggedOutメソッドはlogoutメソッド(ログアウト処理)が実行されたあとに実行される
-
-  Route::get('/ordinary/{slug}','OrdinaryController@TagPost');
-  //Tagに紐づく記事一覧から各記事を見せるview
-
+  Route::get('/ordinary/list', 'OrdinaryController@List');
+  //一般Viewの記事一覧画面
   Route::get('/ordinary/list/{slug}','OrdinaryController@ShowContents');
-  //タイトル→コンテンツで入ったときの記事のコンテンツview
+  //タイトル→コンテンツの記事view
 
+  Route::get('/ordinary/category','OrdinaryController@AllCategory');
+  //AllCategoryのみを見せるview
+  Route::get('/ordinary/category/{slug}','OrdinaryController@CategoryPosts');
+  //各categoryに紐づく記事一覧を見せるview
 
-
-
-
-
-  Route::get('/ordinary/category/{slug}','OrdinaryController@ShowCategory');
-  //Categoryを見せるview
+  Route::get('/ordinary/tag','OrdinaryController@AllTag');
+  //AllTagのみを見せるview
+  Route::get('/ordinary/tag/{slug}','OrdinaryController@TagPost');
+  //各Tagに紐づく記事一覧を見せるview
