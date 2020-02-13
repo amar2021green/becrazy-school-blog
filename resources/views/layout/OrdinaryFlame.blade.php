@@ -13,18 +13,17 @@
 
       <style type="text/css">
       .haikei {
-  background-image: url('/unnamed.jpg');
-  background-position: center center;
-    background-position-x: center;
-    background-position-y: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-attachment: fixed;
-}
+          position: relative;
+          height: 100vh;
+          min-height: 300px;
+          background: url('/unnamed.jpg') no-repeat center center;
+          background-size: cover;
+      }
       </style>
 
 
-        <title>BLOG - @yield('title')</title>
+
+      <title>BLOG - @yield('title')</title>
 
         <!-- オプションとして利用するJavaScript -->
           <!-- jQueryというライブラリが必ず最初, 次にPopper.js, 最後にBootstrap のJavaScriptを読み込むようにする -->
@@ -36,8 +35,35 @@
     </head>
 
     <body>
-      
-      @yield("body")
 
+      <nav class="navbar navbar-expand-md navbar-dark bg-primary fixed-left">
+
+    <a class="navbar-brand" href="/ordinary/list/"><b>WORLD BLOG</b></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <a class="nav-link" href="/ordinary/category">All Category</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="/ordinary/tag">All Tag</a>
+          </li>
+        </ul>
+
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link active" data-class="fixed-left">
+                    <i class="fa fa-arrow-left"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+
+@yield("body")
     </body>
 </html>
