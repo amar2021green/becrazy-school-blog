@@ -1,17 +1,17 @@
-@extends('layout.flame')
-@section('title','Tag')
+@extends('layout.OrdinaryFlame')
+@section('title','Category')
 @section('body')
 <div class="p-3 haikei">
-  
+
   <div class="flex-center position-ref">
-    <h1><b>Category</b></h1>
+    <h1><b>All Category</b></h1><br>
     <ul>
 @foreach($AllCategories as $AC)
-    <li>
-    <a href="/master/AllTags/{{$AC->slug}}">
+
+    <a href="/ordinary/category/{{$AC->slug}}">
     {{$AC->name}}
-  </a>
-    </li>
+    </a>
+
     <br>
 
       @csrf
@@ -19,14 +19,6 @@
 @endforeach
     </ul>
     <br>
-    <a href="http://homestead.test/master/addblog">
-      <button type="button">AddForm</button><br>
-
-        <a href="http://homestead.test/master/addTag">
-          <button type="button">AddTag</button><br>
-
-            <a href="http://homestead.test/master/bloglist">Go Top</a>
-
   </div>
 
 </div>
