@@ -3,8 +3,8 @@
 @section('body')
 <div class="p-3 haikei">
 
-  <div class="flex-center position-ref">
-    <h1><b>WORLD BLOG</b></h1>
+  <div class="flex-center position-ref"><br>
+
     <ul>
       @foreach ($all as $blogs)
 
@@ -19,6 +19,8 @@
     @endforeach
     </ul>
     <br>
+
+
 
   </div>
 
