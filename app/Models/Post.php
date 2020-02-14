@@ -16,6 +16,9 @@ class Post extends Model
      //Eloquentが中間テーブルをtaxonomy_postと認識してしまうので
      //第２引数は今回の中間テーブルを指定している。(今回であればtaxonomy_relationships)
 
+use SoftDeletes;
+
+
 }
 
 
