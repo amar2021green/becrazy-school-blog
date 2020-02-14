@@ -23,11 +23,42 @@
 <dd><textarea name="content" required>{{ $編集blog->content }}</textarea></dd>
 </dl>
 
-<dl>
-<dt>Status</dt>
-<dd><textarea name="status" required>{{ $編集blog->status }}</textarea></dd>
-</dl>
+<dt>Status(公開/非公開)</dt>
+<dd><select name="status">
+  <option value="Open">OPEN</option>
+  <option value="Draft">Draft</option>
+    </select>
+  </dd>
 
+  <dt>Tag</dt>
+  <dd><select name="tag">
+    <option value="">選択してください</option>
+    @foreach($taxonomy as $tag)
+      @if($tag->type == 'tag')
+
+        <option value="{{($tag->id)}}">
+          {{$tag->name}}
+        </option>
+
+      @endif
+    @endforeach
+      </select>
+    </dd>
+
+
+    <dt>Category<dt>
+      <dd><select name="category">
+        <option value="">選択してください</option>
+        @foreach($taxonomy as $category)
+          @if($category->type == 'category')
+
+            <option value="{{$category->id}}">
+              {{$category->name}}
+            </option>
+          @endif
+        @endforeach
+      </select>
+    </dd>
 
 
 @csrf
