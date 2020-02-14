@@ -2,7 +2,7 @@
 @section('title','BLOG投稿')
 @section('body')
 <div class="p-3 haikei">
-  
+
   <dl>
   <form action="/master/addblog" method="post">
 
