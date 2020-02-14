@@ -64,6 +64,9 @@ Route::prefix('master')->group(function () {
   //CategoryまたはTagの更新
   Route::post('/taxonomy/delete', 'MasterController@DeleteTaxonomy');
   //CategoryまたはTagの削除
+
+  Route::get('changepassword', 'MasterController@showChangePasswordForm');
+  Route::post('changepassword', 'MasterController@changePassword')->name('changepassword');
 });
 
 
