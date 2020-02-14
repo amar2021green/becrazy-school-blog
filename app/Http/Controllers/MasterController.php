@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Taxonomy;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Hash;
 
 class MasterController extends Controller {
 
@@ -156,7 +158,8 @@ class MasterController extends Controller {
 //記事編集フォームをviewする
     public function editcontent($id){
       $edit = Post::find($id);
-      return view('post.editblog',['編集blog' => $edit]);
+      $taxonomy = Taxonomy::all();
+      return view('post.editblog',array('編集blog' => $edit,'taxonomy' => $taxonomy));
     }
     //リクエストされたeditidから対象レコードを取得して、$editに代入
     //リターンviewでpost配下のeditblogファイルを表示させる
@@ -176,6 +179,10 @@ class MasterController extends Controller {
       $編集blog->title = $request->title;
       $編集blog->content = $request->content;
       $編集blog->status = $request->status;
+      $編集blog->taxonomy()->detach();
+      if(!empty($request->tag) && !empty($request->category)) {
+        $編集blog->taxonomy()->attach([$request->tag,$request->category]);
+      }
       $編集blog->save();
       return redirect('/master/bloglist');
     }
@@ -193,8 +200,7 @@ class MasterController extends Controller {
   $validatedData = $request->validate([
     'id' => 'required'
   ]);
-  $編集blog = Post::find($request->id);
-  $編集blog->delete();
+  $編集blog = Post::find($request->id)->delete();
   return redirect('/master/bloglist');
 }
 
@@ -236,6 +242,34 @@ class MasterController extends Controller {
     $編集taxonomy->posts()->detach();
     $編集taxonomy->delete();
     return redirect('/master/bloglist');
+    }
+
+    public function showChangePasswordForm() {
+        return view('post.changepassword');
+    }
+    public function changePassword(Request $request) {
+        //現在のパスワードが正しいかを調べる
+        if(!(Hash::check($request->get('current-password'), Auth::user()->password))) {
+            return redirect()->back()->with('change_password_error', '現在のパスワードが間違っています。');
+        }
+
+        //現在のパスワードと新しいパスワードが違っているかを調べる
+        if(strcmp($request->get('current-password'), $request->get('new-password')) == 0) {
+            return redirect()->back()->with('change_password_error', '新しいパスワードが現在のパスワードと同じです。違うパスワードを設定してください。');
+        }
+
+        //パスワードのバリデーション。新しいパスワードは6文字以上、new-password_confirmationフィールドの値と一致しているかどうか。
+        $validated_data = $request->validate([
+            'current-password' => 'required',
+            'new-password' => 'required|string|min:6|confirmed',
+        ]);
+
+        //パスワードを変更
+        $user = Auth::user();
+        $user->password = bcrypt($request->get('new-password'));
+        $user->save();
+
+        return redirect()->back()->with('change_password_success', 'パスワードを変更しました。');
     }
 
 
