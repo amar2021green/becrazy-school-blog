@@ -22,7 +22,7 @@
     <div class="btn-group" role="group" aria-label="グループ2">
       <form action="delete" method="post">
         <input type="hidden" name="id" required value="{{ $blogs->id }}">
-          <button type="button" class="btn btn-warning btn-secondary btn-sm" value="Delete">Delete</button>
+          <button type="submit" class="btn btn-warning btn-secondary btn-sm" value="Delete">Delete</button>
       @csrf
       </form>
     </div><br><br>
